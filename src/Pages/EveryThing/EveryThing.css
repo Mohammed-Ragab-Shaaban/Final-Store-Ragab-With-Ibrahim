@@ -1,0 +1,14 @@
+.athoerAncor,.singleProduct a{
+    text-decoration: none;
+    color: var(--textColor);
+}
+.athoerAncor:hover , .singleProduct a:hover{
+    color: var(--lightGreen);
+
+}
+
+
+
+
+
+

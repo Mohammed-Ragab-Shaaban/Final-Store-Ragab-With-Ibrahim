@@ -1,0 +1,17 @@
+
+
+
+.btnLogin{
+    border: none;
+    background-color : var(--bgGreen);
+    border: 1px solid var(--bgGreen);
+    color: var(--white);
+    padding: 3px 20px;
+    border-radius: 5px;
+}
+
+
+
+.btnLogin:hover{
+    background-color : var(--lightGreen);
+}

@@ -1,0 +1,33 @@
+.addToCartSale{
+
+    padding: 3px 70px;
+    border-radius: 5px;
+    background-color: var(--bgGreen);
+    color: var(--white);
+    border: none;
+    transition: all .5s;
+    display: inline-block;
+}
+
+.addToCartOff{
+
+    padding: 3px 70px;
+    border-radius: 5px;
+    background-color: var(--bgDanger);
+    color: var(--white);
+    border: none;
+    transition: all .5s;
+    display: inline-block;
+}
+
+
+
+.addToCartSale:hover{
+    background-color: var(--bgGreenDark);
+}
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+.register input{
+    width: 100%;
+    padding: 2px 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+
+.register input:focus{
+    border: 1px solid var(--lightGreen);
+}
+
+.registerFormDiv {
+    border: 1px solid var(--lightGreen);
+    border-radius: 5px;
+    padding:30px 10px;
+}
+.registerFormDiv:hover{
+    box-shadow:0px 0px 10px -3px var(--lightGreen);
+}
+
+.registerFormDiv form input:focus{
+    border: 1px solid var(--lightGreen);
+}
