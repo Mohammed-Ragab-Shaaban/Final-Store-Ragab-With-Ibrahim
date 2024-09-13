@@ -1,5 +1,5 @@
 import paypal from '../../assets/paypal.png'
-import payneer from '../../assets/payoneer.png'
+import payneer from '../../assets/Payoneer.png'
 import MasterCard from '../../assets/masterCard.png'
 import { useContext, useReducer, useState } from 'react';
 import { HeaderStateContext } from './Context';
