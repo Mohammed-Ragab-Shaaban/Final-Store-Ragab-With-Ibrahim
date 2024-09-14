@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap");
+.section {
+  padding: 2rem 0;
+}
+/* Start Contact info Section  */
+.contact-header-section {
+  background-color: #f8f6f3;
+  height: 50vh;
+}
+.h1-header {
+  line-height: 8rem;
+  font-size: 3.25rem;
+  font-weight: 700;
+}
+.contact-info-container {
+  margin-top: -103px;
+  box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.13);
+}
+.info-boxs {
+  padding: 3rem;
+  width: 100%;
+}
+.info-box {
+  border: 1px solid #dedede;
+}
+.leaf-img {
+  height: 5rem;
+  width: 13rem;
+  margin-top: -20px;
+  align-self: center;
+}
+/* End Contact info Section  */
+
+/* Media Mobile */
+@media screen and (max-width: 767px) {
+  html {
+    font-size: 12px;
+  }
+  .desc-img {
+    left: 7rem;
+  }
+  .h1-header {
+    font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 165px) {
+  html {
+    font-size: 6px;
+  }
+}
