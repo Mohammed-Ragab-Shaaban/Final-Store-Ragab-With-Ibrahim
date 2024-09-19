@@ -13,14 +13,6 @@ ul {
   list-style: none;
   padding: 0;
 }
-.link {
-  text-decoration: none;
-  color: var(--text-color);
-  transition: var(--transition);
-  padding: 0;
-}
-.link:hover {
-  color: #fff;
-}
+
 
 /* End Global Components  */
