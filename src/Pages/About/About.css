@@ -5,6 +5,7 @@
 :root {
   --green-color: #8bc34a;
   --textColor: #333333;
+  --textColor2: #aeaeae;
   --transition: 0.3s;
 }
 /* Start About Description Section  */
@@ -37,7 +38,6 @@
 /* Start Statistics Section  */
 .Statistics {
   background-color: #000;
-  height: 15rem;
   color: #fff;
 }
 .Statistics-content span {

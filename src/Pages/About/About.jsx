@@ -57,7 +57,7 @@ export default function About() {
         <div className="container">
           <div className="Statistics-container text-center">
             <h4 className="mt-3">Numbers Speak For Themselves!</h4>
-            <div className="Statistics-content d-flex justify-content-between py-4">
+            <div className="Statistics-content d-flex justify-content-between py-4 flex-column flex-md-row">
               <div>
                 <span>5,000 +</span>
                 <p>Curated Products</p>
