@@ -10,7 +10,19 @@ export default function HomePage() {
     <div>
       <Section1 />
       <Section2 />
-      <Footer />
+      {/* <div>
+            {
+              [...Array(5)].map((el,index)=>{
+               
+                return(
+                  <>
+                      <FontAwesomeIcon style={rate <= 3 && rate >! 3 ? {backgroundColor:"yellow"} : null} onClick={()=>{ const rt = index+1; setRate (rt);}} icon={faStar}></FontAwesomeIcon>
+                  </>
+                )
+              })
+              
+            }
+          </div> */}
     </div>
   );
 }

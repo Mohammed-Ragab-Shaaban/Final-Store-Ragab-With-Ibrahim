@@ -17,6 +17,7 @@ const HeaderStateProviderContext = ({children})=>{
     const [Totalcount,setTotalCount] = useState(0);
     const [groceries, setGroceries] = useState([]);
     const [juices, setjuices] = useState([]);
+    const [relatedProductGroceries , setRelatedProductGroceries ] = useState([]);
     const [ren , setRen] = useReducer(x => x + 1 , 0);
 
 
@@ -26,7 +27,8 @@ const HeaderStateProviderContext = ({children})=>{
              setPrice ,token,setToken,showSingleProduct,
               setShowSingleProduct,selectedProduct, setSelectedProduct,
               TotalPrice, setTotalPrice,Totalcount,setTotalCount,
-              groceries, setGroceries,juices, setjuices , ren , setRen}
+              groceries, setGroceries,juices, setjuices , ren , setRen,
+              relatedProductGroceries , setRelatedProductGroceries}
         }>
             {children}
         </HeaderStateContext.Provider>

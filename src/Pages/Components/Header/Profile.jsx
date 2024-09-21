@@ -4,6 +4,7 @@ import { useContext, useReducer, useRef, useState } from "react";
 import { HeaderStateContext } from "../Context";
 import LogOut from "./LogOut";
 import { createRoot } from "react-dom/client";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Profile(props) {
@@ -11,22 +12,13 @@ export default function Profile(props) {
     const {sideList, setSideList,ren , setRen} = useContext(HeaderStateContext);
     const [profileStatus , setProfileStatus] = useState(false);
     // const [ren , setRen] = useReducer(x => x + 1 , 0);
-    // const [ren , setRen] = useReducer(x => x + 1 , 0);
-    // const [tokenStatus , setTokenStatus] = useState(false);
+    const navigat = useNavigate();
 
 
-    // const removeToken = ()=>{
-    //     if(tokenStatus){
-    //         setTokenStatus(true);
-    //     }else{
-    //         localStorage.removeItem("token");
-    //         setTokenStatus(false);
-    //     }
-    // }
 const removeToken = ()=>{
     localStorage.removeItem("token");
-    // const root = createRoot(<Profile/>);
-    // root.render(<Profile />)
+    navigat("/login")
+    // window.forceUpdate();
     setRen();
     }
 

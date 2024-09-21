@@ -1,9 +1,13 @@
 
 import axios from "axios"
 import { useContext, useEffect, useRef, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import './SingleProduct.css'
 import { HeaderStateContext } from "./Context"
+import { Carousel } from "bootstrap"
+import { ButtonBack, ButtonNext, CarouselProvider, Slide, Slider } from "pure-react-carousel"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar } from "@fortawesome/free-solid-svg-icons"
 
 
 export default function SingleJuices() {
@@ -32,8 +36,11 @@ export default function SingleJuices() {
   const params = useParams();
   const [product , setProduct] =  useState([]);
   const productCount = useRef();
-  const {selectedProduct, setSelectedProduct,Totalcount,setTotalCount,TotalPrice, setTotalPrice} = useContext(HeaderStateContext);
+  const {selectedProduct, setSelectedProduct,Totalcount,
+         setShowSingleProduct, setTotalCount,TotalPrice, setTotalPrice} = useContext(HeaderStateContext);
   const [selected,setSelected] = useState([]);
+  const [relatedProductJuices,setRelatedProductJuices] = useState([]);
+
   
   useEffect(()=>{
       axios.get("http://localhost:1337/api/juices/"+ +params.id + "?populate=*" ).then((res)=>{
@@ -45,6 +52,14 @@ export default function SingleJuices() {
       })
   },[])
 
+  useEffect(()=>{
+    axios.get("http://localhost:1337/api/juices/?populate=*" ).then((res)=>{
+      setRelatedProductJuices(res.data.data)
+    }).catch((err)=>{
+      // console.log("error");
+    })
+},[])
+
 const handleCont = ()=>{
   setOrderCount(orderCount + +countPrice.current.value) ;
   
@@ -55,8 +70,14 @@ const finalProduCtCount = (e)=>{
     e.target.value = 0;
   };
   }
+  const handleNavigate = ()=>{
+    this.forceUpdate();
+  }
+  
+
 
   return (
+    <>
     <div className="py-5" style={{backgroundColor:"var(--bgProducts)"}} >
           {
            product.map((el,index)=>{
@@ -99,17 +120,75 @@ const finalProduCtCount = (e)=>{
                 </div>
                 </div>
             </div>
-
-
               )
             })
           }
-
-      
-
-
-
     </div>
+
+    <div className="container mt-3">
+    <h2>Related Records</h2>
+    <div className='p-5'>
+          
+          <CarouselProvider
+              naturalSlideWidth={100}
+              naturalSlideHeight={150}
+              totalSlides={9}
+              step={1}
+              visibleSlides={3}
+              lockOnWindowScroll={false}
+              orientation="horizontal"
+              tag="div"
+            
+          >
+            
+              <Slider className='border p-4'>
+                  {
+                    relatedProductJuices.filter((e,index)=>{
+                      return e.attributes.name != product[0].attributes.name
+                    }).map((el,ind) => {
+                    return(
+                      <Slide key={ind} index={ind}>
+
+                          <div className="singleProduct border p-2" style={{maxWidth:"250px"}}>
+                            <div className="position-relative">
+
+                                <span className="p-1 p-md-3" style={el.attributes.state == true ? saleStyle : offStyle } >
+                                    {el.attributes.state ? "sale" : "off"}
+                                </span>
+
+                                <Link onClick={handleNavigate} to={".././" +  el.id}>
+                              
+                                    <img src={"http://localhost:1337"+ el.attributes.Image.data[0].attributes.url} 
+                                        alt="product" style={{maxWidth:"100%",cursor:"pointer",}} 
+                                        onClick={()=>{setShowSingleProduct(el.attributes.category)}}/>
+                              
+                                </Link>
+                            </div>
+                            <div className="d-flex flex-column align-items-center">
+                                <span className="relatedCat">{el.attributes.category}</span>
+                                <Link to={"./" + el.id}><h5 className="text-center relatedN" onClick={()=>{setShowSingleProduct(el.attributes.category)}}>{el.attributes.name}</h5></Link>
+                                <div className="relatedCat">
+                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                </div>
+                                <span className="relatedCat">£{el.attributes.price}</span>
+                            </div>
+                        </div>
+                      </Slide>
+                    )
+                  })
+                }
+              </Slider>
+              <ButtonBack className="btnRelatedP">{"<<"}</ButtonBack>
+              <ButtonNext className="btnRelatedP">{">>"}</ButtonNext>
+          
+          </CarouselProvider>
+      </div>
+    </div>
+  </>
   )
 }
 

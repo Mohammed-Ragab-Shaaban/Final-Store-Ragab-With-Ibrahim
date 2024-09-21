@@ -2,8 +2,10 @@ import { useContext, useRef, useState } from "react";
 import { HeaderStateContext } from "../Components/Context";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-regular-svg-icons";
+import { faStar, faStarHalfAlt } from "@fortawesome/free-regular-svg-icons";
 import '../EveryThing/EveryThing.css'
+import { faStarAndCrescent, faStarHalf } from "@fortawesome/free-solid-svg-icons";
+
 
 
 export default function ProductsFilter() {
@@ -16,22 +18,23 @@ export default function ProductsFilter() {
   const [maxValue , setMaxValue] = useState(0);
   const minref = useRef();
   const maxref = useRef();
+  const [rate,setRate] = useState();
 
   
+  console.log(groceries);
 
 const randomG = [...groceries]
 const randomNum = Math.floor(Math.random() * randomG.length-1) + 1;
-console.log(randomNum);
 const randomNumX = randomNum;
 const randomSelecedG = randomG.splice(+randomNumX ,2);
-console.log(randomSelecedG);
+// console.log(randomSelecedG);
 
 const randomJ = [...juices]
 const randomNumJ = Math.floor(Math.random() * randomJ.length-1) + 1;
-console.log(randomNumJ);
+// console.log(randomNumJ);
 const randomNumXJ = randomNumJ;
 const randomSelecedJ = randomJ.splice(+randomNumXJ ,2);
-console.log(randomSelecedJ);
+// console.log(randomSelecedJ);
 
 
 const saleStyle ={
@@ -88,6 +91,10 @@ const saleStyle ={
   console.log(newJuices)
 
   }
+
+
+
+
 
   return (
     <div>
@@ -151,13 +158,21 @@ const saleStyle ={
                             <div className="d-flex flex-column align-items-center">
                                 <span>{el.attributes.category}</span>
                                 <Link to={"./" + el.id}><h6 className="text-center" onClick={()=>{setShowSingleProduct(el.attributes.category)}}>{el.attributes.name}</h6></Link>
-                                <div>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    
+                                <div className="d-flex gap-1">
+                                  {
+                                    [<FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    ].map((x,index)=>{
+                                      return(
+                                        <div key={index} style={index+1 <= +el.attributes.rate ? {color:"orange"} : null}>
+                                          {x} 
+                                        </div>
+                                      )
+                                    })
+                                  }
                                 </div>
                                 <span>£{el.attributes.price}</span>
                             </div>
@@ -185,13 +200,21 @@ const saleStyle ={
                             <div className="d-flex flex-column align-items-center">
                                 <span>{el.attributes.category}</span>
                                 <Link to={"./" + el.id}><h6 className="text-center" onClick={()=>{setShowSingleProduct(el.attributes.category)}}>{el.attributes.name}</h6></Link>
-                                <div>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    
+                                <div className="d-flex gap-1">
+                                  {
+                                    [<FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    ].map((x,index)=>{
+                                      return(
+                                        <div key={index} style={index+1 <= +el.attributes.rate ? {color:"orange"} : null}>
+                                          {x} 
+                                        </div>
+                                      )
+                                    })
+                                  }
                                 </div>
                                 <span>£{el.attributes.price}</span>
                             </div>
@@ -203,5 +226,8 @@ const saleStyle ={
       </div>
 
     </div>
-  )
+  
+
+
+)
 }

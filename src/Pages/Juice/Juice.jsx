@@ -65,13 +65,22 @@ export default function Juice() {
                         <div className="d-flex flex-column align-items-center">
                             <span>{el.attributes.category}</span>
                             <Link to={"./" + el.id}><h5 className="text-center">{el.attributes.name}</h5></Link>
-                            <div>
-                                <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                            </div>
+                            <div className="d-flex gap-1">
+                                  {
+                                    [<FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                    ].map((x,index)=>{
+                                      return(
+                                        <div key={index} style={index+1 <= +el.attributes.rate ? {color:"orange"} : null}>
+                                          {x} 
+                                        </div>
+                                      )
+                                    })
+                                  }
+                                </div>
                             <span>£{el.attributes.price}</span>
                         </div>
                     </div>

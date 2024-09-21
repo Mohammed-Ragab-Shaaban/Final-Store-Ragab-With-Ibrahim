@@ -1,8 +1,15 @@
 import axios from "axios"
 import { useContext, useEffect, useRef, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import './SingleProduct.css'
 import { HeaderStateContext } from "./Context"
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar } from "@fortawesome/free-solid-svg-icons"
+// import RelatedProductGroceries from "./RelatedProductGroceries"
+
+
 
 export default function SingleGroceries() {
   const saleStyle ={
@@ -24,23 +31,41 @@ export default function SingleGroceries() {
         left: "-10px",
         }
 
-  const {orderCount,setOrderCount,price , setPrice} = useContext(HeaderStateContext);
+        
+  // const {orderCount,setOrderCount,price , setPrice} = useContext(HeaderStateContext);
   const params = useParams();
   const [product , setProduct] =  useState([]);
   const productCount = useRef();
-  const {selectedProduct, setSelectedProduct,Totalcount,setTotalCount,TotalPrice, setTotalPrice} = useContext(HeaderStateContext);
-  const [selected,setSelected] = useState([]);
+  const {selectedProduct, setSelectedProduct,Totalcount,
+          setTotalCount,TotalPrice, setTotalPrice,groceries,
+        ren,  setRen,setShowSingleProduct } = useContext(HeaderStateContext);
 
+  const [relatedProductGroceries,setRelatedProductGroceries] = useState([]);
+  const [selected,setSelected] = useState(0);
+  const [render,setRender] = useState(0);
+  const navigate = useNavigate();
+ 
+
+  // console.log(groceries)
   
   useEffect(()=>{
       axios.get("http://localhost:1337/api/groceries-cats/"+ +params.id + "?populate=*" ).then((res)=>{
-        // console.log(res.data.data);
         setProduct([res.data.data]);
+        console.log(product);
 
       }).catch((err)=>{
         // console.log("error");
       })
   },[])
+
+
+  useEffect(()=>{
+    axios.get("http://localhost:1337/api/groceries-cats/?populate=*" ).then((res)=>{
+      setRelatedProductGroceries(res.data.data)
+    }).catch((err)=>{
+      // console.log("error");
+    })
+},[])
 
 
 const finalProduCtCount = (e)=>{
@@ -49,14 +74,18 @@ if(e.target.value < 0){
 };
 }
 
+const handleNavigate = ()=>{
+  this.forceUpdate();
+}
 
   return (
+    <>
     <div className="py-5" style={{backgroundColor:"var(--bgProducts)"}} >
           {
            product.map((el,index)=>{
               return(
-
-                <div key={index} className="container row m-auto">
+                <>
+                <div key={index} className="bbbb container row m-auto">
                     <div className="col-12 col-md-6 position-relative">
                       <span style={el.attributes.state == true ? saleStyle : offStyle } >
                             {el.attributes.state ? "sale" : "off"}
@@ -94,11 +123,85 @@ if(e.target.value < 0){
                     </div>
                 </div>
 
+                <div className=" container description my-4">
+                  <button>Description</button>
+                  <button>Reviews (0)</button>
+                    <div className="py-3">
+                      <p>{el.attributes.Description}</p>
+                    </div>
+                </div>
+                </>
+
               )
             })
           }
 
+  
+
     </div>
+
+
+    <div className="container mt-3">
+      <h2>Related Records</h2>
+      <div className='p-5'>
+            <CarouselProvider
+                naturalSlideWidth={100}
+                naturalSlideHeight={150}
+                totalSlides={9}
+                step={1}
+                visibleSlides={3}
+                lockOnWindowScroll={false}
+                orientation="horizontal"
+                tag="div"
+               
+            >
+                <Slider className='border p-4'>
+                    {
+                      relatedProductGroceries.filter((e,index)=>{
+                        return e.attributes.name != product[0].attributes.name
+                      }).map((el,ind) => {
+                      return(
+                        <Slide key={ind} index={ind}>
+
+                            <div className="singleProduct border p-2" style={{maxWidth:"250px"}}>
+                              <div className="position-relative">
+
+                                  <span className="p-1 p-md-3" style={el.attributes.state == true ? saleStyle : offStyle } >
+                                      {el.attributes.state ? "sale" : "off"}
+                                  </span>
+
+                                  <Link onClick={handleNavigate} to={".././" +  el.id}>
+                                 
+                                      <img src={"http://localhost:1337"+ el.attributes.Image.data.attributes.url} 
+                                          alt="product" style={{maxWidth:"100%",cursor:"pointer",}} 
+                                          onClick={()=>{setShowSingleProduct(el.attributes.category)}}/>
+                                 
+                                  </Link>
+                              </div>
+                              <div className="d-flex flex-column align-items-center">
+                                  <span className="relatedCat">{el.attributes.category}</span>
+                                  <Link to={"./" + el.id}><h5 className="text-center relatedN" onClick={()=>{setShowSingleProduct(el.attributes.category)}}>{el.attributes.name}</h5></Link>
+                                  <div className="relatedCat">
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
+                                  </div>
+                                  <span className="relatedCat">£{el.attributes.price}</span>
+                              </div>
+                          </div>
+                        </Slide>
+                      )
+                    })
+                  }
+                </Slider>
+                <ButtonBack className="btnRelatedP">{"<<"}</ButtonBack>
+                <ButtonNext className="btnRelatedP">{">>"}</ButtonNext>
+            </CarouselProvider>
+        </div>
+    </div>
+    </>
   )
 }
 
