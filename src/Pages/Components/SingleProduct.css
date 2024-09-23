@@ -1,4 +1,4 @@
-.addToCartSale{
+.addToCartSale {
 
     padding: 3px 70px;
     border-radius: 5px;
@@ -100,6 +100,20 @@ font-weight: bold;
   border-top: 3px solid var(--bgGreen);
 }
 
+.reviews button{
+  padding: 5px 30px;
+  border-radius: 5px;
+  background-color: var(--bgGreen);
+  color: var(--white);
+  border: none;
+  transition: all .5s;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.reviews button:hover{
+  background-color: var(--bgGreenDark);
+}
 
 
 
@@ -118,5 +132,16 @@ font-weight: bold;
 }
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 

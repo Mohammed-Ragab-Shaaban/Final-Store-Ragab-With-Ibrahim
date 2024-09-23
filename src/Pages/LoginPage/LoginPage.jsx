@@ -11,7 +11,7 @@ export default function RegisterPage() {
 
     const emailInput = useRef();
     const passInput = useRef();
-    const {token,setToken} = useContext(HeaderStateContext);
+    const {token,setToken,userData , setUserData} = useContext(HeaderStateContext);
     const navigat = useNavigate();
 
     const handleLogin = ()=>{
@@ -26,7 +26,8 @@ export default function RegisterPage() {
         axios.post("http://localhost:1337/api/auth/local",obj).then((res)=>{
             localStorage.setItem("token",JSON.stringify(res.data.jwt));
             setToken(res.data.jwt);
-            navigat("/buyPage")
+            setUserData(res.data);
+            navigat("/buyPage");
         }).catch((err)=>{
             console.log("sorry")
         })   

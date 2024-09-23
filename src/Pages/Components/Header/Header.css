@@ -48,8 +48,42 @@ a{
     display: inline-block;
 }
 
+.userDetails {
+    background-color: var(--bgProducts);
+    height: 400px;
+    width: 60%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 0px #aaa;
+}
 
-@media only screen and (max-width: 767px){
+ .userImage   {
+    width: 150px;
+    height: 150px;
+    background-color: var(--bgProducts);
+    position: relative;
+    top: -75px;
+    border-radius: 100px;
+    box-shadow: 0px 0px 8px 0px #aaa;
+    }
+
+
+ .userDetails button  {
+    padding: 5px 30px;
+    border-radius: 100px;
+    background: none;
+    color: var(--bgGreen);
+    border: none;
+    border: 1px solid  var(--bgGreen);
+    transition: all .5s;
+    display: inline-block;
+    }
+    .userDetails button:hover{
+        background-color: var(--bgGreen); 
+        color: var(--white);
+    }
+
+@media only screen and (max-width: 768px){
     .headerMenu li {
         border-bottom: 1px solid #ddd;
     }
@@ -57,7 +91,17 @@ a{
     .headerMenu li:hover{
         background-color: var(--lightBgGreen)
     }
+    .userDetails{
+        width: 95%;
+        }
 }
+
+/* @media only screen and (max-width: 424px){
+    .userDetails{
+    width: 95%;
+    }
+} */
+
 
 
 .shopnowBtn{

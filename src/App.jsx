@@ -18,6 +18,7 @@ import SingleJuices from "./Pages/Components/SingleJuices";
 import About from "./Pages/About/About";
 import Contact from "./Pages/Contact/Contact";
 import Footer from "./Pages/Components/Footer/Footer";
+import UserProfilePage from "./Pages/Components/Header/UserProfilePage";
 
 export default function App() {
   const { showSingleProduct, setShowSingleProduct,token } = useContext(HeaderStateContext);
@@ -58,7 +59,8 @@ export default function App() {
             <Route path="/contact" element={<Contact />}></Route>
             <Route path="/login" element={<LoginPage />}></Route>
             <Route path="/register" element={<RegisterPage />}></Route>
-            <Route path="/buyPage" element={token ? <BuyPage /> : <LoginPage />}></Route>
+            <Route path="/buyPage" element={<BuyPage />}></Route>
+            <Route path="/userProfile" element={<UserProfilePage />}></Route>
             <Route path="*" element={<h1>404 Page</h1>}></Route>
           </Route>
         </Routes>

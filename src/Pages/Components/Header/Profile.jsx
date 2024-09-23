@@ -4,7 +4,7 @@ import { useContext, useReducer, useRef, useState } from "react";
 import { HeaderStateContext } from "../Context";
 import LogOut from "./LogOut";
 import { createRoot } from "react-dom/client";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export default function Profile(props) {
@@ -51,7 +51,7 @@ const removeToken = ()=>{
                 <div ref={profileRef} style={profileStatus ? {display:"block"} : {display :"none"}} className={sideList ? "profilePageSmall" : "profilePageLarge"}>
                     <div className="position-relative">
                         <ul className={sideList ? "profilePageUlSmall" : "profilePageUlLarge"}>
-                            <li>Profile</li>
+                            <li><Link to={'/userProfile'} style={{color:"black",textDecoration:"none"}}>Profile</Link></li>
                             <li onClick={removeToken}>Log out</li>
                         </ul>
                     </div>
