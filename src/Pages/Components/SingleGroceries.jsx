@@ -7,6 +7,11 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faStar } from "@fortawesome/free-solid-svg-icons"
+import { Navigation, Pagination } from 'swiper/modules';
+import { SwiperSlide , Swiper } from 'swiper/react'
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 
 export default function SingleGroceries() {
@@ -51,20 +56,24 @@ export default function SingleGroceries() {
       axios.get("http://localhost:1337/api/groceries-cats/"+ +params.id + "?populate=*" ).then((res)=>{
         setProduct([res.data.data]);
         console.log(product);
-
+        axios.get("http://localhost:1337/api/groceries-cats/?populate=*" ).then((res)=>{
+          setRelatedProductGroceries(res.data.data)
+        }).catch((err)=>{
+          // console.log("error");
+        })
       }).catch((err)=>{
         // console.log("error");
       })
   },[])
 
 
-  useEffect(()=>{
-    axios.get("http://localhost:1337/api/groceries-cats/?populate=*" ).then((res)=>{
-      setRelatedProductGroceries(res.data.data)
-    }).catch((err)=>{
-      // console.log("error");
-    })
-},[])
+//   useEffect(()=>{
+//     axios.get("http://localhost:1337/api/groceries-cats/?populate=*" ).then((res)=>{
+//       setRelatedProductGroceries(res.data.data)
+//     }).catch((err)=>{
+//       // console.log("error");
+//     })
+// },[])
 
 
 const finalProduCtCount = (e)=>{
@@ -74,7 +83,7 @@ if(e.target.value < 0){
 }
 
 const handleNavigate = ()=>{
-  this.forceUpdate();
+  // this.forceUpdate();
 }
 
 const handleDescription = ()=>{
@@ -112,9 +121,11 @@ axios.post("http://localhost:1337/api/auth/local/",userObj).then((res1)=>{
 }).catch((err1)=>{
   setShowErrorReviews(true);
 });
-
-
 }
+
+// const handelSingleGroceries = ()=>{
+// console.log(el.id);
+// };
 
   return (
     <>
@@ -207,70 +218,94 @@ axios.post("http://localhost:1337/api/auth/local/",userObj).then((res1)=>{
               )
             })
           }
-
-  
-
     </div>
-
 
     <div className="container mt-3">
       <h2>Related Records</h2>
       <div className='p-5'>
-            <CarouselProvider
-                naturalSlideWidth={100}
-                naturalSlideHeight={150}
-                totalSlides={9}
-                step={1}
-                visibleSlides={3}
-                lockOnWindowScroll={false}
-                orientation="horizontal"
-                tag="div"
-               
-            >
-                <Slider className='border p-4'>
-                    {
-                      relatedProductGroceries.filter((e,index)=>{
-                        return e.attributes.name != product[0].attributes.name
-                      }).map((el,ind) => {
-                      return(
-                        <Slide key={ind} index={ind}>
+      <Swiper    
+       modules={[Navigation, Pagination]}
+      spaceBetween={50}
+      slidesPerView={3}
+      navigation= {true}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        640: {
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
+        768: {
+          slidesPerView: 3,
+          spaceBetween: 40,
+      
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 50,
+        },
+      }}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
 
-                            <div className="singleProduct border p-2" style={{maxWidth:"250px"}}>
-                              <div className="position-relative">
+      
+        {
+          relatedProductGroceries.filter((x)=>{
+            return x.attributes.name != product[0].attributes.name
+          }).map((el,index)=>{
+            return (
+              <SwiperSlide key={index}>
+                      <div key={index} className="singleProduct" style={{width:"250px"}}>
+                        <div className="position-relative">
 
-                                  <span className="p-1 p-md-3" style={el.attributes.state == true ? saleStyle : offStyle } >
-                                      {el.attributes.state ? "sale" : "off"}
-                                  </span>
-
-                                  <Link onClick={handleNavigate} to={".././" +  el.id}>
-                                 
-                                      <img src={"http://localhost:1337"+ el.attributes.Image.data.attributes.url} 
-                                          alt="product" style={{maxWidth:"100%",cursor:"pointer",}} 
-                                          onClick={()=>{setShowSingleProduct(el.attributes.category)}}/>
-                                 
-                                  </Link>
-                              </div>
-                              <div className="d-flex flex-column align-items-center">
-                                  <span className="relatedCat">{el.attributes.category}</span>
-                                  <Link to={"./" + el.id}><h5 className="text-center relatedN" onClick={()=>{setShowSingleProduct(el.attributes.category)}}>{el.attributes.name}</h5></Link>
-                                  <div className="relatedCat">
+                            <span style={el.attributes.state == true ? saleStyle : offStyle } >
+                                {el.attributes.state ? "sale" : "off"}
+                            </span>
+                            
+                            <Link onClick={()=>{
+                                 axios.get("http://localhost:1337/api/groceries-cats/"+ +el.id + "?populate=*" ).then((res)=>{
+                                  navigate(".././" + el.id)
+                                  setProduct([res.data.data]);
+                                  console.log(el.id);
+                                }).catch((err)=>{
+                                  // console.log("error");
+                                })
+                            }}><img src={"http://localhost:1337"+ el.attributes.Image.data.attributes.url} alt="product" style={{maxWidth:"100%"}}/></Link>
+                        </div>
+                        <div className="d-flex flex-column align-items-center">
+                            <span>{el.attributes.category}</span>
+                            <Link onClick={()=>{
+                                 axios.get("http://localhost:1337/api/groceries-cats/"+ +el.id + "?populate=*" ).then((res)=>{
+                                  navigate(".././" + el.id)
+                                  setProduct([res.data.data]);
+                                }).catch((err)=>{
+                                  // console.log("error");
+                                })
+                            }} ><h5 className="text-center">{el.attributes.name}</h5></Link>
+                            <div className="d-flex gap-1">
+                                  {
+                                    [<FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
+                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>,
                                       <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                      <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                  </div>
-                                  <span className="relatedCat">£{el.attributes.price}</span>
-                              </div>
-                          </div>
-                        </Slide>
-                      )
-                    })
-                  }
-                </Slider>
-                <ButtonBack className="btnRelatedP">{"<<"}</ButtonBack>
-                <ButtonNext className="btnRelatedP">{">>"}</ButtonNext>
-            </CarouselProvider>
+                                    ].map((x,index)=>{
+                                      return(
+                                        <div key={index} style={index+1 <= +el.attributes.rate ? {color:"orange"} : null}>
+                                          {x} 
+                                        </div>
+                                      )
+                                    })
+                                  }
+                                </div>
+                            <span>£{el.attributes.price}</span>
+                        </div>
+                    </div>
+              </SwiperSlide>
+            )
+          })
+        }
+    </Swiper>
         </div>
     </div>
     </>

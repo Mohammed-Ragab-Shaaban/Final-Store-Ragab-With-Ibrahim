@@ -61,11 +61,11 @@ export default function Contact() {
             </div>
             <div className="accordion-container row mt-4 justify-content-between align-content-between w-100">
               <div className="accordion-left col-lg-6">
-                <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
+                <div className="accordion" id="accordionExample">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingOne">
                       <button
-                        class="accordion-button"
+                        className="accordion-button"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseOne"
@@ -77,11 +77,11 @@ export default function Contact() {
                     </h2>
                     <div
                       id="collapseOne"
-                      class="accordion-collapse collapse show"
+                      className="accordion-collapse collapse show"
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         I am item content. Click edit button to change this
                         text. Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Ut elit tellus, luctus nec ullamcorper mattis,
@@ -89,10 +89,10 @@ export default function Contact() {
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingTwo">
                       <button
-                        class="accordion-button collapsed"
+                        className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseTwo"
@@ -104,11 +104,11 @@ export default function Contact() {
                     </h2>
                     <div
                       id="collapseTwo"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingTwo"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         I am item content. Click edit button to change this
                         text. Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Ut elit tellus, luctus nec ullamcorper mattis,
@@ -116,10 +116,10 @@ export default function Contact() {
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingThree">
                       <button
-                        class="accordion-button collapsed"
+                        className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapseThree"
@@ -131,11 +131,11 @@ export default function Contact() {
                     </h2>
                     <div
                       id="collapseThree"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         I am item content. Click edit button to change this
                         text. Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Ut elit tellus, luctus nec ullamcorper mattis,
@@ -146,11 +146,11 @@ export default function Contact() {
                 </div>
               </div>
               <div className="accordion-right col-lg-6">
-                <div class="accordion" id="accordionExample">
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
+                <div className="accordion" id="accordionExample">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingOne">
                       <button
-                        class="accordion-button"
+                        className="accordion-button"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapse-1"
@@ -162,11 +162,11 @@ export default function Contact() {
                     </h2>
                     <div
                       id="collapse-1"
-                      class="accordion-collapse collapse show"
+                      className="accordion-collapse collapse show"
                       aria-labelledby="headingOne"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         This is the first item's accordion body. I am item
                         content. Click edit button to change this text. Lorem
                         ipsum dolor sit amet, consectetur adipiscing elit. Ut
@@ -175,10 +175,10 @@ export default function Contact() {
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingTwo">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingTwo">
                       <button
-                        class="accordion-button collapsed"
+                        className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapse-2"
@@ -190,11 +190,11 @@ export default function Contact() {
                     </h2>
                     <div
                       id="collapse-2"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingTwo"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         I am item content. Click edit button to change this
                         text. Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Ut elit tellus, luctus nec ullamcorper mattis,
@@ -202,10 +202,10 @@ export default function Contact() {
                       </div>
                     </div>
                   </div>
-                  <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingThree">
+                  <div className="accordion-item">
+                    <h2 className="accordion-header" id="headingThree">
                       <button
-                        class="accordion-button collapsed"
+                        className="accordion-button collapsed"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#collapse-3"
@@ -217,11 +217,11 @@ export default function Contact() {
                     </h2>
                     <div
                       id="collapse-3"
-                      class="accordion-collapse collapse"
+                      className="accordion-collapse collapse"
                       aria-labelledby="headingThree"
                       data-bs-parent="#accordionExample"
                     >
-                      <div class="accordion-body">
+                      <div className="accordion-body">
                         I am item content. Click edit button to change this
                         text. Lorem ipsum dolor sit amet, consectetur adipiscing
                         elit. Ut elit tellus, luctus nec ullamcorper mattis,
