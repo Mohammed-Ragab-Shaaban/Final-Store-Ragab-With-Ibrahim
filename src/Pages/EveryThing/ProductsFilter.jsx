@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStarHalfAlt } from "@fortawesome/free-regular-svg-icons";
 import '../EveryThing/EveryThing.css'
 import { faStarAndCrescent, faStarHalf } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 
 
@@ -20,21 +21,17 @@ export default function ProductsFilter() {
   const maxref = useRef();
   const [rate,setRate] = useState();
 
-  
-  console.log(groceries);
 
 const randomG = [...groceries]
 const randomNum = Math.floor(Math.random() * randomG.length-1) + 1;
 const randomNumX = randomNum;
 const randomSelecedG = randomG.splice(+randomNumX ,2);
-// console.log(randomSelecedG);
 
-const randomJ = [...juices]
+
+const randomJ = [...juices];
 const randomNumJ = Math.floor(Math.random() * randomJ.length-1) + 1;
-// console.log(randomNumJ);
 const randomNumXJ = randomNumJ;
 const randomSelecedJ = randomJ.splice(+randomNumXJ ,2);
-// console.log(randomSelecedJ);
 
 
 const saleStyle ={
@@ -59,18 +56,36 @@ const saleStyle ={
 
   const searchSubmit = ()=>{
     event.preventDefault();
+    const gg = [...groceries];
+    const jj = [...juices];
+
     const newGroceries = groceries.filter((el,index)=>{
       return el.attributes.name.includes(searchValue);
     });
+
     const newJuices = juices.filter((el,index)=>{
       return el.attributes.name.includes(searchValue);
     });
     if(searchValue != undefined && searchValue != "" && searchValue != null ){
       setGroceries(newGroceries);
       setjuices(newJuices);
-      // console.log("aaa");
     }else{
-      // setGroceries(refG.current);
+     
+      axios.get("http://localhost:1337/api/groceries-cats/?populate=*").then((res)=>{
+        setGroceries(res.data.data);       
+        // console.log(res.data.data);       
+    }).catch((err)=>{
+        // console.log(err);
+    })
+      axios.get("http://localhost:1337/api/juices/?populate=*").then((res)=>{
+        setjuices(res.data.data);     
+    }).catch((err)=>{
+        // console.log(err);
+    })
+      // console.log(gg);
+      // console.log(jj);
+      // console.log("aaa");
+    
     }
   }
 
@@ -86,9 +101,6 @@ const saleStyle ={
 
   setGroceries(newGroceries);
   setjuices(newJuices);
-
-  console.log(newGroceries)
-  console.log(newJuices)
 
   }
 

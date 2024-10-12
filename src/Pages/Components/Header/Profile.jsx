@@ -9,13 +9,13 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Profile(props) {
 
-    const {sideList, setSideList,ren , setRen} = useContext(HeaderStateContext);
+    const {sideList, setSideList,ren , setRen,image , setImage} = useContext(HeaderStateContext);
     const [profileStatus , setProfileStatus] = useState(false);
     // const [ren , setRen] = useReducer(x => x + 1 , 0);
     const navigat = useNavigate();
 
 
-const removeToken = ()=>{
+const removeToken = (e)=>{
     localStorage.removeItem("token");
     navigat("/login")
     // window.forceUpdate();
@@ -44,15 +44,18 @@ const removeToken = ()=>{
         <div className={sideList ? props.P_LogOut  : "d-none d-md-block"}>
             <div className="position-relative">
                 <div className="text-center p-2 p-md-0">
-                    <button onClick={profileToggle} className="rounded-circle" style={btnProfileStyle}>
-                        <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                    <button onClick={profileToggle} className="rounded-circle overflow-hidden" style={btnProfileStyle}>
+                        {
+                            image ? <img src={URL.createObjectURL(image)} style={{width:"35px",cursor:"pointer"}}/> :  <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                        }
+                       
                     </button>
                 </div>
                 <div ref={profileRef} style={profileStatus ? {display:"block"} : {display :"none"}} className={sideList ? "profilePageSmall" : "profilePageLarge"}>
                     <div className="position-relative">
                         <ul className={sideList ? "profilePageUlSmall" : "profilePageUlLarge"}>
-                            <li><Link to={'/userProfile'} style={{color:"black",textDecoration:"none"}}>Profile</Link></li>
-                            <li onClick={removeToken}>Log out</li>
+                            <li><Link onClick={()=>{setProfileStatus(false);}} to={'/userProfile'} style={{color:"black",textDecoration:"none"}}>Profile</Link></li>
+                            <li onClick={(e)=>{removeToken(e), setProfileStatus(false)}}>Log out</li>
                         </ul>
                     </div>
                 </div>

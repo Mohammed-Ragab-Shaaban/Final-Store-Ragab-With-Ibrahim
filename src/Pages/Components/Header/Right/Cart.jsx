@@ -21,7 +21,7 @@ export default function Cart() {
       navToLogin("/login");
     }
   }
-  console.log(token)
+  // console.log(token)
 
   const btnBuyStyle = {
     border: "none",

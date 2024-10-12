@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
-    <div className="footer mt-4 footer_section">
+    <div className="footer footer_section">
       <div className="container">
         <div className="footer_section_container ">
           <div className="footer-top d-flex row py-5">

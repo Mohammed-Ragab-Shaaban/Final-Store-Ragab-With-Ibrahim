@@ -77,8 +77,8 @@ export default function AllProducts() {
                                     alt="product" style={{maxWidth:"100%",cursor:"pointer",}} 
                                     onClick={()=>{setShowSingleProduct(el.attributes.category)}}/>
                             </Link>
-                            
-                       
+                        
+                        
                         </div>
                         <div className="d-flex flex-column align-items-center">
                             <span>{el.attributes.category}</span>

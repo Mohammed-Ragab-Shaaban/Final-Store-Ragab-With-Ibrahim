@@ -32,7 +32,7 @@ const c =  selectedProduct.map((el,index)=>{
     return x;
   },0)
   setTotalCount(cc => c);
-  console.log(Totalcount)
+  // console.log(Totalcount)
 
   // map to get total price of selected products
 const p =  selectedProduct.map((el,index)=>{
@@ -44,7 +44,7 @@ const p =  selectedProduct.map((el,index)=>{
   return x;
 },0)
 setTotalPrice(pp => p);
-  console.log(TotalPrice);
+  // console.log(TotalPrice);
  
   return (
     <div style={{backgroundColor:"var(--bgProducts)"}}>

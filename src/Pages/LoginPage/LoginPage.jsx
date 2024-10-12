@@ -1,9 +1,11 @@
-import { useContext, useRef } from 'react'
+import { useContext, useRef, useState } from 'react'
 import '../RegisterPage/RegisterPage.css'
 import axios from 'axios';
 import { HeaderStateContext } from "../Components/Context";
 import { Link, useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -13,6 +15,9 @@ export default function RegisterPage() {
     const passInput = useRef();
     const {token,setToken,userData , setUserData} = useContext(HeaderStateContext);
     const navigat = useNavigate();
+    const [viewPassword,setViewPassword] =  useState(false);
+    const [invalidAccount,setInvalidAccount] = useState(false);
+
 
     const handleLogin = ()=>{
         event.preventDefault();
@@ -29,11 +34,17 @@ export default function RegisterPage() {
             setUserData(res.data);
             navigat("/buyPage");
         }).catch((err)=>{
-            console.log("sorry")
+           setInvalidAccount(true);
         })   
+        };
+
+    const handleViewPassword = ()=>{
+        if(viewPassword == false){
+            setViewPassword(true);
+        }else{
+            setViewPassword(false);
         }
-
-
+    };
 
   return (
     <div style={{backgroundColor:"var(--bgProducts)",height:"90vh"}}>
@@ -43,7 +54,7 @@ export default function RegisterPage() {
             </div>
             <h3>Login</h3>
             <div>
-                <form onClick={handleLogin} className='register' style={{width:"100%",margin:"auto"}}>
+                <form onSubmit={handleLogin} className='register' style={{width:"100%",margin:"auto"}}>
                     <div className="row gap-2 gap-md-0 mb-2 justify-content-center">
 
                         <div className="col-12 row">
@@ -51,7 +62,7 @@ export default function RegisterPage() {
                                 <label htmlFor="email">Email</label>
                             </div>
                             <div className='col-12'>
-                                <input ref={emailInput} type="email" id="email" name="email" placeholder="Your email.." />
+                                <input onChange={()=>{setInvalidAccount(false)}} ref={emailInput} type="email" id="email" name="email" placeholder="Your email.." />
                             </div>
                         </div>
 
@@ -59,16 +70,22 @@ export default function RegisterPage() {
                             <div className='col-12'>
                                 <label htmlFor="password">Password</label>
                             </div>
-                            <div className='col-12'>
-                                <input ref={passInput} type="password" id="password" name="password" placeholder="Your password.." />
+                            <div className='col-12 position-relative'>
+                                <input onChange={()=>{setInvalidAccount(false)}} ref={passInput} type={viewPassword == false ? "password" : "text"} id="password" name="password" placeholder="Your password.." />
+                                   <div onClick={handleViewPassword} className='position-absolute' style={{top:"10%" , right:"25px",cursor:"pointer"}}>
+                                     {
+                                        viewPassword == false ? <FontAwesomeIcon icon={faEye}></FontAwesomeIcon> : <FontAwesomeIcon icon={faEyeSlash}></FontAwesomeIcon>
+                                     }
+                                   </div>
                             </div>
                         </div>
+                        <div className='col-6 text-center text-danger' style={invalidAccount ? {display:"block"} : {display:"none"}}>Invalid email or password</div>
                     </div>
                     <div style={{width:"92%",margin:"auto"}}>
-                    <div className='d-flex justify-content-between'>
-                        <button type='submit' className='btnLogin' >Login</button>
-                        <Link to={'/register'}>Create account</Link>
-                    </div>
+                        <div className='d-flex justify-content-between'>
+                            <button type='submit' className='btnLogin' >Login</button>
+                            <Link to={'/register'}>Create account</Link>
+                        </div>
                     </div>
                 </form>
 

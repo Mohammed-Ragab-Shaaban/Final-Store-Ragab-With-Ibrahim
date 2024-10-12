@@ -50,7 +50,7 @@ a{
 
 .userDetails {
     background-color: var(--bgProducts);
-    height: 400px;
+    height: 420px;
     width: 60%;
     margin: auto;
     border-radius: 10px;
@@ -65,6 +65,10 @@ a{
     top: -75px;
     border-radius: 100px;
     box-shadow: 0px 0px 8px 0px #aaa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     }
 
 
@@ -83,6 +87,32 @@ a{
         color: var(--white);
     }
 
+
+    .newProductForm label{
+        width: 35%;
+    }
+    .newProductForm select, .newProductForm input,.newProductForm textarea {
+        width: 65%;
+        padding: 5px;
+    }
+
+    .newProductForm button {
+        border: none;
+        background-color: var(--bgGreen);
+        color: var(--white);
+        padding: 2px 7px;
+        border-radius: 5px;
+        width: 50%;
+        margin: auto;
+        }
+
+        .defaultImage{
+            height: inherit;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #777;
+        }
 @media only screen and (max-width: 768px){
     .headerMenu li {
         border-bottom: 1px solid #ddd;
@@ -94,6 +124,14 @@ a{
     .userDetails{
         width: 95%;
         }
+    .newProductForm label{
+        width:100%;
+    }
+    .newProductForm select, .newProductForm input,.newProductForm textarea {
+        width: 100%;
+    }
+
+
 }
 
 /* @media only screen and (max-width: 424px){

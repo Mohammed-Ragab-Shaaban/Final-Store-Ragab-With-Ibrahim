@@ -21,15 +21,6 @@ export default function Groceries() {
         })
 
     },[])
-
-    // useEffect(()=>{
-    //     axios.get("http://localhost:1337/api/juices/?populate=*").then((res)=>{
-    //         setjuices(res.data.data);           
-    //     }).catch((err)=>{
-    //         console.log(err);
-    //     })
-
-    // },[])
   
     const saleStyle ={
     backgroundColor: "var(--bgGreen)",
